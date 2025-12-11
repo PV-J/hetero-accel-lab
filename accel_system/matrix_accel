@@ -1,0 +1,31 @@
+# accel_system/matrix_accel.py
+
+from typing import List, Tuple
+
+class MatrixAccelerator:
+    """Toy matrix accelerator model."""
+
+    def __init__(self, name: str = "matrix_accel", base_latency: float = 1.0):
+        self.name = name
+        self.base_latency = base_latency  # arbitrary time units
+
+    def run(self, matrix: List[List[float]], vector: List[float]) -> Tuple[List[float], float]:
+        """Compute y = A * x with a simple latency model."""
+        if not matrix:
+            return [], 0.0
+
+        # Dense matrix-vector multiply
+        result = []
+        for row in matrix:
+            acc = 0.0
+            for a, x in zip(row, vector):
+                acc += a * x
+            result.append(acc)
+
+        # Simple latency: base + proportional to ops
+        num_rows = len(matrix)
+        num_cols = len(matrix[0])
+        ops = num_rows * num_cols
+        latency = self.base_latency + 0.001 * ops  # toy model
+
+        return result, latency
