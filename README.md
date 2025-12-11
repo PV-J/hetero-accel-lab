@@ -14,6 +14,9 @@ All core components live under the `accel_system/` package:
 Supporting folders:
 
 - `examples/` – End-to-end pipelines using matrix + DSP + RF + security
+  - `example_inference_with_pqc.py` – Single run with CLI knobs
+  - `compare_bottlenecks.py` – Compute-heavy vs communication-heavy comparison
+  - `scheduler_demo.py` – Shows `EnhancedScheduler` recommendations for three bottleneck scenarios
 - `tests/` – Basic end-to-end checks
 
 The goal is to explore how changes in workload size and link bandwidth shift the system bottleneck between compute, communication, and security, without writing RTL or using vendor tools.
